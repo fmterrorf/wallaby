@@ -9,6 +9,7 @@ defmodule Wallaby.HTTPClient do
   @type request_opts :: {:encode_json, boolean}
   @type response :: map
   @type web_driver_error_reason :: :stale_reference | :invalid_selector | :unexpected_alert
+  require Logger
 
   @status_obscured 13
   # The maximum time we'll sleep is for 50ms
@@ -103,6 +104,7 @@ defmodule Wallaby.HTTPClient do
           | {:error, web_driver_error_reason}
           | no_return
   defp check_for_response_errors(response) do
+    Logger.info(inspect(response))
     response = coerce_json_message(response)
 
     case Map.get(response, "value") do
