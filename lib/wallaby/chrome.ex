@@ -118,7 +118,7 @@ defmodule Wallaby.Chrome do
 
   ```elixir
   Wallaby.start_session(
-    capabilities: %{chromeOptions: %{args: ["--headless"]}},
+    capabilities: %{chromeOptions: %{args: ["--headless", "--disable-dev-shm-usage"]}},
     create_session_fn: fn url, capabilities ->
       WebdriverClient.create_session(url, capabilities)
     end
