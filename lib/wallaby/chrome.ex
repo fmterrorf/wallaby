@@ -550,6 +550,7 @@ defmodule Wallaby.Chrome do
     chrome_options =
       maybe_put_chrome_executable(%{
         args: [
+          "--disable-dev-shm-usage",
           "--no-sandbox",
           "window-size=1280,800",
           "--disable-gpu",
