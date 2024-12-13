@@ -1,6 +1,7 @@
 defmodule Wallaby.Chrome.Chromedriver.Server do
   @moduledoc false
   use GenServer
+  require Logger
 
   alias Wallaby.Chrome.Chromedriver.ReadinessChecker
   alias Wallaby.Driver.Utils
@@ -129,7 +130,7 @@ defmodule Wallaby.Chrome.Chromedriver.Server do
   end
 
   def handle_info({port, {:data, output}}, %State{wrapper_script_port: port} = state) do
-    dbg(output)
+    Logger.info(inspect(output))
     case analyze_output(output) do
       {:os_pid, os_pid} ->
         {:noreply, %State{state | chromedriver_os_pid: os_pid}}
